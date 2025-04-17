@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace FileGenerator;
 
+[ExcludeFromCodeCoverage]
 public class StringFactory
 {
     private readonly List<string> _dictionary;
@@ -12,7 +15,7 @@ public class StringFactory
         };
     }
 
-    public string GetRandomString()
+    public virtual string GetRandomString()
     {
         var localRandom = Random.Shared;
         return _dictionary[localRandom.Next(_dictionary.Count)];
