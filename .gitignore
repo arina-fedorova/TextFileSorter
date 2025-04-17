@@ -1,0 +1,12 @@
+# === .NET build ===
+bin/
+obj/
+
+# === Rider ===
+.idea/
+
+# === VS Code ===
+.vscode/
+
+# === VS / Resharper ===
+.vs/
