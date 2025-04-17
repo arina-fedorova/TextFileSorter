@@ -5,9 +5,10 @@ const long bytesInMegabyte = 1024L * 1024L;
 Console.WriteLine("Enter the output directory path:");
 var outputPath = Console.ReadLine();
 
-if (string.IsNullOrWhiteSpace(outputPath))
+if (string.IsNullOrWhiteSpace(outputPath) ||
+    !Directory.Exists(outputPath))
 {
-    Console.WriteLine("Invalid file path.");
+    Console.WriteLine("Invalid directory path.");
     return;
 }
 
