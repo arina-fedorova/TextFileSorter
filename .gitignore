@@ -4,10 +4,12 @@ obj/
 
 # === Rider ===
 .idea/
+*.DotSettings.user
 
 # === VS Code ===
 .vscode/
 
 # === VS / Resharper ===
 .vs/
+
 *.txt

@@ -28,7 +28,10 @@ public class ChunkSorter
                     continue;
                 }
 
-                entries.Add(LineParser.Parse(line));
+                if (LineParser.TryParse(line, out var entry))
+                {
+                    entries.Add(entry);
+                }
             }
 
             entries.Sort(_comparer);

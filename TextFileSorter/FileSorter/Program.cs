@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using FileSorter;
+﻿using FileSorter;
 
 const string outputFileName = "sorted_file.txt";
 
@@ -18,22 +17,20 @@ var tempDir = Path.Combine(Path.GetDirectoryName(outputPath) ?? ".", "temp_chunk
 
 Directory.CreateDirectory(tempDir);
 
-var stopwatch = Stopwatch.StartNew();
-
-Console.WriteLine("Sorting chunks...");
 var sorter = new ChunkSorter();
-var chunkFiles = sorter.ProcessChunks(inputPath, tempDir);
 
-Console.WriteLine($"{chunkFiles.Count} sorted chunk(s) created.");
+var chunkFiles = StopwatchHelper.Measure("Sorting chunks", () =>
+    sorter.ProcessChunks(inputPath, tempDir)
+);
 
-Console.WriteLine("Parallel merging...");
-var intermediateFiles = MergeWorker.MergeGroups(chunkFiles, groupSize: 4, tempDir);
+var intermediateFiles = StopwatchHelper.Measure("Parallel merging", () =>
+    MergeWorker.MergeGroups(chunkFiles, groupSize: 4, tempDir)
+);
 
-Console.WriteLine("Final merge...");
-ChunkMerger.Merge(intermediateFiles, outputPath);
+StopwatchHelper.Measure("Final merge", () =>
+    ChunkMerger.Merge(intermediateFiles, outputPath)
+);
 
-stopwatch.Stop();
-Console.WriteLine($"Done! Sorted file: {outputPath}");
-Console.WriteLine($"Total time: {stopwatch.Elapsed}");
-
-Directory.Delete(tempDir, recursive: true);
+StopwatchHelper.Measure("Cleanup", () =>
+    Directory.Delete(tempDir, recursive: true)
+);
