@@ -33,7 +33,7 @@ public class ChunkSorterTests
             "20. Banana"
         ], options => options.WithStrictOrdering());
 
-        // Сleanup
+        // Cleanup
         File.Delete(inputPath);
         foreach (var file in chunks)
         {
