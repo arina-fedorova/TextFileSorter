@@ -21,8 +21,8 @@ public class ChunkMerger
             var line = readers[i].ReadLine();
             if (line != null)
             {
-                queue.Enqueue((LineParser.Parse(line), i), LineParser.Parse(line));
-            }
+                var parsedLine = LineParser.Parse(line);
+                queue.Enqueue((parsedLine, i), parsedLine);
         }
 
         using var writer = new StreamWriter(outputPath);
