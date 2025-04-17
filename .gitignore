@@ -10,3 +10,4 @@ obj/
 
 # === VS / Resharper ===
 .vs/
+*.txt
